@@ -9,6 +9,11 @@
     flex-direction: column;
   }
 
+  #restaurant-container,
+  #reviews-container {
+    width: calc(100% - 20px);
+  }
+
 }
 
 /* ====================== Tablet Portrait ====================== */
@@ -16,6 +21,11 @@
 @media screen and (min-width: 600px) and (max-width: 899px) {
   #restaurants-list li {
     width: calc((100% - 60px) / 2);
+  }
+
+  #restaurant-container,
+  #reviews-container {
+    width: calc(100% - 80px);
   }
 
 }
@@ -27,6 +37,19 @@
     width: calc((100% - 90px) / 3);
   }
 
+  #restaurant-container,
+  #reviews-container {
+    width: calc(100% - 60px);
+  }
+
+  #reviews-list {
+    display: flex;
+  }
+
+  #reviews-list li {
+    flex: 1;
+  }
+
 }
 
 /* ====================== Desktop ====================== */
@@ -34,6 +57,60 @@
 @media screen and (min-width: 1200px) {
   #restaurants-list li {
     width: calc((100% - 120px) / 4);
+  }
+
+  .inside #map-container {
+    height: calc(100% - 80px);
+    position: fixed;
+    right: 0;
+    top: 80px;
+    width: 50%;
+  }
+
+  #restaurant-container,
+  #reviews-container {
+    padding: 40px 30px;
+    width: calc(50% - 80px);
+  }
+
+  .inside #footer {
+    width: calc(50% - 50px);
+  }
+
+  #breadcrumb {
+    width: calc(50% - 80px);
+  }
+
+  .inside header {
+    position: fixed;
+  }
+
+}
+
+/* ====================== Non-Desktop ====================== */
+
+@media screen and (max-width: 1199px) {
+  .inside #map-container {
+    height: 400px;
+    position: relative;
+    width: 100%;
+  }
+
+  #restaurant-container,
+  #reviews-container {
+    margin: 30px auto 0;
+  }
+
+  .inside #footer {
+    width: calc(100% - 50px);
+  }
+
+  #breadcrumb {
+    width: calc(100% - 80px);
+  }
+
+  .inside header {
+    position: relative;
   }
 
 }
