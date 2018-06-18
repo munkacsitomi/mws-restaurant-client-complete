@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import "_helpers.css";
+@import "_media-queries.css";
 /* CSS Document */
 
 :root {
@@ -9,6 +10,8 @@
   --background-color: #eeeeee;
   --nav-background-color: #757575;
   --text-color: #212121;
+  --box-shadow-color: #e4e4e4;
+  --border-radius: 4px;
 }
 
 body,
@@ -67,7 +70,7 @@ section {
   display: block;
 }
 #maincontent {
-  background-color: var(--surface-color);
+  background-color: var(--background-color);
   min-height: 100%;
 }
 #footer {
@@ -178,6 +181,8 @@ nav h1 a {
   padding: 0 30px 25px;
   text-align: left;
   width: 270px;
+  box-shadow: 1px 4px 5px var(--box-shadow-color);
+  border-radius: var(--border-radius);
 }
 #restaurants-list .restaurant-img {
   background-color: var(--surface-color);
@@ -187,7 +192,7 @@ nav h1 a {
   min-height: 248px;
   min-width: 100%;
 }
-#restaurants-list li h1 {
+#restaurants-list li h3 {
   color: var(--primary-color);
   font-family: Arial, sans-serif;
   font-size: 14pt;
@@ -236,7 +241,7 @@ nav h1 a {
 .inside #footer {
   bottom: 0;
   position: absolute;
-  width: 100%;
+  width: calc(50% - 50px);
 }
 #restaurant-name {
   color: var(--primary-color);
@@ -269,8 +274,7 @@ nav h1 a {
 }
 #restaurant-container,
 #reviews-container {
-  border-top: 1px solid var(--surface-color);
-  padding: 140px 10px 30px;
+  padding: 140px 40px 30px;
   width: calc(50% - 20px);
 }
 #reviews-container {
@@ -297,6 +301,8 @@ nav h1 a {
   padding: 0 20px 20px;
   position: relative;
   width: 85%;
+  box-shadow: 1px 4px 5px var(--box-shadow-color);
+  border-radius: var(--border-radius);
 }
 #reviews-list li p {
   margin: 0 0 10px;
