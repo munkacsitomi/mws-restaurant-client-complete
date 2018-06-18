@@ -23,6 +23,13 @@
   justify-content: center;
 }
 
+.flex-container-center-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .flex-1 {
   flex: 1;
 }

@@ -1,23 +1,39 @@
 /* ====================== Phone ====================== */
 
-@media (max-width: 599px) {
+@media screen and (max-width: 599px) {
+  #restaurants-list li {
+    width: 100%;
+  }
+
+  .filter-options {
+    flex-direction: column;
+  }
 
 }
 
 /* ====================== Tablet Portrait ====================== */
 
-@media (min-width: 600px) {
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  #restaurants-list li {
+    width: calc((100% - 60px) / 2);
+  }
 
 }
 
 /* ====================== Tablet Landscape ====================== */
 
-@media (min-width: 900px) {
+@media screen and (min-width: 900px) and (max-width: 1199px) {
+  #restaurants-list li {
+    width: calc((100% - 90px) / 3);
+  }
 
 }
 
 /* ====================== Desktop ====================== */
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
+  #restaurants-list li {
+    width: calc((100% - 120px) / 4);
+  }
 
 }

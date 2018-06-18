@@ -8,9 +8,9 @@
   --secondary-color: #0277bd;
   --surface-color: #ffffff;
   --background-color: #eeeeee;
-  --nav-background-color: #757575;
+  --nav-background-color: #2b2b2b;
   --text-color: #212121;
-  --box-shadow-color: #e4e4e4;
+  --box-shadow: 0 1px 20px 0 rgba(46, 61, 73, 0.2);
   --border-radius: 4px;
 }
 
@@ -68,6 +68,9 @@ menu,
 nav,
 section {
   display: block;
+}
+img {
+  object-fit: cover;
 }
 #maincontent {
   background-color: var(--background-color);
@@ -144,6 +147,7 @@ nav h1 a {
   height: auto;
   background-color: var(--secondary-color);
   align-items: center;
+  padding: 10px;
 }
 .filter-options h2 {
   color: var(--surface-color);
@@ -151,7 +155,6 @@ nav h1 a {
   font-weight: normal;
   line-height: 1;
   margin: 0 20px;
-  padding: 10px 0 0;
 }
 .filter-options select {
   background-color: var(--surface-color);
@@ -178,10 +181,9 @@ nav h1 a {
   font-family: Arial, sans-serif;
   margin: 15px;
   min-height: 380px;
-  padding: 0 30px 25px;
-  text-align: left;
-  width: 270px;
-  box-shadow: 1px 4px 5px var(--box-shadow-color);
+  padding: 0;
+  text-align: center;
+  box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
 }
 #restaurants-list .restaurant-img {
@@ -191,6 +193,8 @@ nav h1 a {
   max-width: 100%;
   min-height: 248px;
   min-width: 100%;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
 }
 #restaurants-list li h3 {
   color: var(--primary-color);
@@ -203,20 +207,21 @@ nav h1 a {
   text-transform: uppercase;
 }
 #restaurants-list p {
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 11pt;
 }
 #restaurants-list li a {
   background-color: var(--primary-color);
-  border-bottom: 3px solid var(--background-color);
   color: var(--surface-color);
   display: inline-block;
   font-size: 10pt;
-  margin: 15px 0 0;
+  margin: auto 0 0;
   padding: 8px 30px 10px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
 }
 
 /* ====================== Restaurant Details ====================== */
@@ -301,7 +306,7 @@ nav h1 a {
   padding: 0 20px 20px;
   position: relative;
   width: 85%;
-  box-shadow: 1px 4px 5px var(--box-shadow-color);
+  box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
 }
 #reviews-list li p {
