@@ -257,6 +257,7 @@ nav h1 a {
 #restaurant-address {
   font-size: 12pt;
   margin: 10px 0px;
+  color: var(--secondary-color);
 }
 #restaurant-cuisine {
   background-color: var(--text-color);
@@ -290,14 +291,25 @@ nav h1 a {
   list-style-type: none;
   margin: 0 15px 30px;
   overflow: hidden;
-  padding: 0 20px 20px;
   position: relative;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
 }
 #reviews-list li p {
-  margin: 0 0 10px;
+  padding: 0 12px;
 }
 #restaurant-hours td {
   color: var(--text-color);
+}
+
+.review-header {
+  background-color: var(--primary-color);
+}
+
+.review-header p {
+  color: var(--surface-color);
+}
+
+.review-comment {
+  font-style: italic;
 }

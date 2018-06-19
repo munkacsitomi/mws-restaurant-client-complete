@@ -58,10 +58,12 @@
 
   #reviews-list {
     display: flex;
+    flex-flow: row wrap;
   }
 
   #reviews-list li {
     flex: 1;
+    min-width: calc(50% - 60px);
   }
 
 }

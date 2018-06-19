@@ -11,6 +11,11 @@
   flex-direction: column;
 }
 
+.flex-container-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .flex-container-row-wrap {
   display: flex;
   flex-flow: row wrap;
