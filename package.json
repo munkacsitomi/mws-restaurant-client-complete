@@ -1,0 +1,23 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Mobile Web Specialist Certification Course Stage 1",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "srcset": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://munkacsitomi@github.com/munkacsitomi/mws-restaurant-stage-1.git"
+  },
+  "author": "Tamas Munkacsi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/munkacsitomi/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/munkacsitomi/mws-restaurant-stage-1#readme",
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-responsive-images": "^1.10.1"
+  }
+}
