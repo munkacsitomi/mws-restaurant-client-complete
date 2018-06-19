@@ -42,6 +42,20 @@
     width: calc(100% - 60px);
   }
 
+  #restaurant-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #restaurant-container div {
+    flex: 1;
+    margin: 0 15px;
+  }
+
+  #restaurant-cuisine {
+    margin-top: 74px;
+  }
+
   #reviews-list {
     display: flex;
   }
