@@ -35,22 +35,6 @@ initMap = () => {
   });
 }
 
-/* window.initMap = () => {
-  fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: restaurant.latlng,
-        scrollwheel: false
-      });
-      fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
-    }
-  });
-} */
-
 /**
  * Get current restaurant from page URL.
  */
@@ -94,7 +78,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant, '800', 'large');
   image.alt = restaurant.name;
 
-  source.media = '(max-width: 1199px)';
+  source.media = '(min-width: 900px) and (max-width: 1199px), (max-width: 599px)';
   source.srcset = DBHelper.imageUrlForRestaurant(restaurant);
 
   picture.insertBefore(source, image);

@@ -254,10 +254,20 @@ nav h1 a {
   text-transform: uppercase;
   line-height: 1.1;
 }
+.restaurant-details {
+  border-radius: var(--border-radius);
+  background-color: var(--surface-color);
+  box-shadow: var(--box-shadow);
+}
 #restaurant-address {
   font-size: 12pt;
-  margin: 10px 0px;
-  color: var(--secondary-color);
+  margin-bottom: 10px;
+  padding: 12px;
+  text-align: center;
+  background-color: var(--secondary-color);
+  color: var(--surface-color);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
 }
 #restaurant-cuisine {
   background-color: var(--text-color);
@@ -271,6 +281,13 @@ nav h1 a {
   text-transform: uppercase;
   width: 100%;
   border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+#restaurant-hours {
+  margin: auto;
+}
+#restaurant-hours td {
+  color: var(--text-color);
 }
 #reviews-container {
   background-color: var(--background-color);
@@ -297,9 +314,6 @@ nav h1 a {
 }
 #reviews-list li p {
   padding: 0 12px;
-}
-#restaurant-hours td {
-  color: var(--text-color);
 }
 
 .review-header {

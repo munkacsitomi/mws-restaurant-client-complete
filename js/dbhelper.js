@@ -149,9 +149,10 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant(restaurant, width = '500', size = 'small') {
+  static imageUrlForRestaurant(restaurant, width = '540', size = 'small') {
     const splitExtension = restaurant.photograph.split('.');
-    return (`/img_srcset/${splitExtension[0]}-${width}_${size}_1x.${splitExtension[1]}`);
+    const [filename, extension] = splitExtension;
+    return (`/img_srcset/${filename}-${width}_${size}_1x.${extension}`);
   }
 
   /**
@@ -167,16 +168,6 @@ class DBHelper {
       marker.addTo(newMap);
     return marker;
   }
-  /* static mapMarkerForRestaurant(restaurant, map) {
-    const marker = new google.maps.Marker({
-      position: restaurant.latlng,
-      title: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant),
-      map: map,
-      animation: google.maps.Animation.DROP}
-    );
-    return marker;
-  } */
 
 }
 

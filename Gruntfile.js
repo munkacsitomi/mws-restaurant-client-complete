@@ -8,10 +8,10 @@ module.exports = function(grunt) {
             {
               width: 800,
               suffix: '_large_1x',
-              quality: 50
+              quality: 90
             },
             {
-              width: 500,
+              width: 540,
               suffix: '_small_1x',
               quality: 50
             }
