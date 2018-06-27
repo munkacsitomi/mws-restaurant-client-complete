@@ -1,5 +1,5 @@
 const cacheName = 'restaurant-cache';
-const cacheVersion = 'v1';
+const cacheVersion = 'v2';
 const cache = `${cacheName}-${cacheVersion}`;
 
 const urlsToCache = [
@@ -10,7 +10,6 @@ const urlsToCache = [
   './js/dbhelper.js',
   './js/main.js',
   './js/restaurant_info.js',
-  './data/restaurants.json',
   './img_srcset/1-540_small_1x.jpg',
   './img_srcset/2-540_small_1x.jpg',
   './img_srcset/3-540_small_1x.jpg',
@@ -21,6 +20,7 @@ const urlsToCache = [
   './img_srcset/8-540_small_1x.jpg',
   './img_srcset/9-540_small_1x.jpg',
   './img_srcset/10-540_small_1x.jpg',
+  './img_srcset/default-540_small_1x.jpg',
   './img_srcset/1-800_large_1x.jpg',
   './img_srcset/2-800_large_1x.jpg',
   './img_srcset/3-800_large_1x.jpg',
@@ -30,7 +30,8 @@ const urlsToCache = [
   './img_srcset/7-800_large_1x.jpg',
   './img_srcset/8-800_large_1x.jpg',
   './img_srcset/9-800_large_1x.jpg',
-  './img_srcset/10-800_large_1x.jpg'
+  './img_srcset/10-800_large_1x.jpg',
+  './img_srcset/default-800_large_1x.jpg'
 ];
 
 self.addEventListener('install', event => {
