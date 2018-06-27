@@ -2,14 +2,16 @@
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
+## How to start local API server
+
+- Clone this repository and follow the instructions: https://github.com/munkacsitomi/mws-restaurant-stage-2
+
 ## How to start local server
 
-- In this folder, start up a simple HTTP server to serve up the site files on your local computer. Python has some simple tools to do this, and you don't even need to know Python. For most people, it's already installed on your computer.
-
-In a terminal, check the version of Python you have: `python -V`. If you have Python 2.x, spin up the server with `python -m SimpleHTTPServer 8000` (or some other port, if port 8000 is already in use.) For Python 3.x, you can use `python3 -m http.server 8000`. If you don't have Python installed, navigate to Python's [website](https://www.python.org/) to download and install the software.
-
-- With your server running, visit the site: `http://localhost:8000`
-- If Node.js already installed to your computer you are able to start the local server with `npm start` and run debugger from VSCode.
+- Install node modules: `npm i`
+- Install http-server globally: `npm i http-server -g`
+- You are able to start the local server with `npm start`
+- With your server running, visit the site: `http://localhost:8000` or run debug from VSCode
 
 ### Requirements for Stage 1
 
@@ -22,6 +24,14 @@ In a terminal, check the version of Python you have: `python -V`. If you have Py
 - [x] Focus is appropriately managed allowing users to noticeably tab through each of the important elements of the page. Modal or interstitial windows appropriately lock focus.
 - [x] Elements on the page use the appropriate semantic elements. For those elements in which a semantic element is not available, appropriate ARIA roles are defined.
 - [x] When available in the browser, the site uses a service worker to cache responses to requests for site assets. Visited pages are rendered when there is no network access.
+
+### Requirements for Stage 2
+
+- [ ] The client application should pull restaurant data from the development server, parse the JSON response, and use the information to render the appropriate sections of the application UI.
+- [ ] The client application works offline. JSON responses are cached using the IndexedDB API. Any data previously accessed while connected is reachable while offline.
+- [x] The application maintains a responsive design on mobile, tablet and desktop viewports.
+- [x] The application retains accessibility features from the Stage 1 project. Images have alternate text, the application uses appropriate focus management for navigation, and semantic elements and ARIA attributes are used correctly.
+- [ ] Lighthouse targets for each category exceed: Progressive Web App: >90, Performance: >70, Accessibility: >90.
 
 ### Developer Notes
 

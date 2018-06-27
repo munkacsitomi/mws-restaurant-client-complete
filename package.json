@@ -4,7 +4,8 @@
   "description": "Mobile Web Specialist Certification Course Stage 1",
   "main": "Gruntfile.js",
   "scripts": {
-    "start": "python -m SimpleHTTPServer 8000",
+    "start": "http-server ./ -p 8000",
+    "start-python": "python -m SimpleHTTPServer 8000",
     "srcset": "grunt responsive_images"
   },
   "repository": {
