@@ -1,4 +1,6 @@
 const cacheName = 'restaurant-cache';
+const cacheVersion = 'v1';
+const cache = `${cacheName}-${cacheVersion}`;
 
 const urlsToCache = [
   '/',
@@ -34,7 +36,7 @@ const urlsToCache = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches
-      .open(cacheName)
+      .open(cache)
       .then(cache => cache.addAll(urlsToCache))
       .then(() => self.skipWaiting())
   );
