@@ -36,6 +36,7 @@
 ### Developer Notes
 
 If you want to generate new images you need to setup some tools first.
-1. Install Grunt globally `npm i -g grunt`
-2. Install GraphicsMagick `brew install GraphicsMagick`
-3. Now you're able to generate new images: `grunt responsive_images` or `npm run srcset`
+1. Install Gulp globally `npm i -g gulp`
+2. Install ImageMagick `brew install imagemagick`
+3. Install GraphicsMagick `brew install graphicsmagick`
+4. Now you're able to generate new images: `gulp resize-images` or `npm run resize-images`
