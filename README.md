@@ -9,9 +9,7 @@
 ## How to start local server
 
 - Install node modules: `npm i`
-- Install http-server globally: `npm i http-server -g`
-- You are able to start the local server with `npm start`
-- With your server running, visit the site: `http://localhost:8000` or run debug from VSCode
+- You are able to start the local server: `gulp`
 
 ### Requirements for Stage 1
 

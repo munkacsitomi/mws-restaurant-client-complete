@@ -1,12 +1,12 @@
 const cacheName = 'restaurant-cache';
-const cacheVersion = 'v2';
+const cacheVersion = 'v5';
 const cache = `${cacheName}-${cacheVersion}`;
 
 const urlsToCache = [
   '/',
   './index.html',
   './restaurant.html',
-  './css/styles.css',
+  './css/styles.min.css',
   './js/dbhelper.js',
   './js/main.js',
   './js/restaurant_info.js',
