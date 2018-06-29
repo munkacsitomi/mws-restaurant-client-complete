@@ -7,7 +7,7 @@ const minify = require('gulp-minify');
 const cleanCSS = require('gulp-clean-css');
 
 gulp.task('resize-images', () => {
-  const imgs = gulp.src('assets/img/*');
+  const imgs = gulp.src('src/assets/img/*');
   const srcsetFolder = 'img_srcset';
   const largeWidth = 800;
   const smallWidth = 540;
@@ -33,15 +33,13 @@ gulp.task('resize-images', () => {
 
 gulp.task('scripts', () => {
   gulp
-    .src('assets/js/**/*.js')
-    // .pipe(concat('all.js'))
+    .src('src/assets/js/**/*.js')
     .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('scripts-dist', () => {
   gulp
-    .src('assets/js/**/*.js')
-    // .pipe(concat('all.js'))
+    .src('src/assets/js/**/*.js')
     .pipe(minify({
       ext: {
         min: '.min.js'
@@ -51,20 +49,20 @@ gulp.task('scripts-dist', () => {
 });
 
 gulp.task('copy-html', () => {
-  gulp.src(['index.html', 'restaurant.html']).pipe(gulp.dest('./dist'));
+  gulp.src(['src/index.html', 'src/restaurant.html']).pipe(gulp.dest('./dist'));
 });
 
 gulp.task('copy-sw', () => {
-  gulp.src('./sw.js').pipe(gulp.dest('./dist'));
+  gulp.src('src/sw.js').pipe(gulp.dest('./dist'));
 });
 
 gulp.task('copy-images', () => {
-  gulp.src('assets/img_srcset/*').pipe(gulp.dest('dist/img_srcset'));
+  gulp.src('src/assets/img_srcset/*').pipe(gulp.dest('dist/img_srcset'));
 });
 
 gulp.task('styles', () => {
   gulp
-    .src('assets/css/**/*.css')
+    .src('src/assets/css/**/*.css')
     .pipe(concat('styles.min.css'))
     .pipe(cleanCSS())
     .pipe(gulp.dest('dist/css'))
@@ -74,9 +72,9 @@ gulp.task('styles', () => {
 gulp.task('dist', ['copy-html', 'copy-images', 'copy-sw', 'styles', 'scripts-dist']);
 
 gulp.task('default', ['copy-html', 'copy-images', 'copy-sw', 'styles', 'scripts'], () => {
-  gulp.watch('css/**/*.css', ['styles']);
-  gulp.watch('js/**/*.js', ['scripts']);
-  gulp.watch(['index.html', 'restaurant.html'], ['copy-html']);
+  gulp.watch('src/assets/css/**/*.css', ['styles']);
+  gulp.watch('src/assets/js/**/*.js', ['scripts']);
+  gulp.watch(['src/index.html', 'src/restaurant.html'], ['copy-html']);
   gulp.watch(['dist/*.html']).on('change', browserSync.reload);
 
   browserSync.init({
