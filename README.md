@@ -8,8 +8,9 @@
 
 ## How to start local server
 
-- Install node modules: `npm i`
-- You are able to start the local server: `gulp`
+1. Install node modules `npm i`
+2. Install Gulp globally `npm i -g gulp`
+3. You are able to start the local server `gulp`
 
 ### Requirements for Stage 1
 
@@ -34,7 +35,6 @@
 ### Developer Notes
 
 If you want to generate new images you need to setup some tools first.
-1. Install Gulp globally `npm i -g gulp`
-2. Install ImageMagick `brew install imagemagick`
-3. Install GraphicsMagick `brew install graphicsmagick`
-4. Now you're able to generate new images: `gulp resize-images` or `npm run resize-images`
+1. Install ImageMagick `brew install imagemagick`
+2. Install GraphicsMagick `brew install graphicsmagick`
+3. Now you're able to generate new images: `gulp resize-images`

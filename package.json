@@ -5,9 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "start-python": "python -m SimpleHTTPServer 8000",
-    "build": "gulp dist",
-    "resize-images": "gulp resize-images"
+    "build": "gulp dist"
   },
   "repository": {
     "type": "git",
