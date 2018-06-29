@@ -1,12 +1,11 @@
-const cacheName = 'restaurant-cache';
-const cacheVersion = 'v5';
-const cache = `${cacheName}-${cacheVersion}`;
+const cacheName = 'restaurant-cache-v7';
 
 const urlsToCache = [
   '/',
   './index.html',
   './restaurant.html',
   './css/styles.min.css',
+  './js/idb-keyval.js',
   './js/dbhelper.js',
   './js/main.js',
   './js/restaurant_info.js',
@@ -37,7 +36,7 @@ const urlsToCache = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches
-      .open(cache)
+      .open(cacheName)
       .then(cache => cache.addAll(urlsToCache))
       .then(() => self.skipWaiting())
   );
