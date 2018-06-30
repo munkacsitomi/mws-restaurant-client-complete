@@ -134,18 +134,14 @@ resetRestaurants = (restaurants) => {
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
-  let tabIndex = 4;
-  restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant, tabIndex));
-    tabIndex++;
-  });
+  restaurants.forEach(restaurant => ul.append(createRestaurantHTML(restaurant)));
   addMarkersToMap();
 }
 
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant, tabIndex) => {
+createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
   li.className = 'flex-container';
 
@@ -171,7 +167,6 @@ createRestaurantHTML = (restaurant, tabIndex) => {
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
   more.setAttribute('aria-label', `View ${restaurant.name} details`);
-  more.setAttribute('tabindex', tabIndex);
   li.append(more)
 
   return li
