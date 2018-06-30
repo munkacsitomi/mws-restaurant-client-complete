@@ -54,10 +54,12 @@ gulp.task('copy-html', () => {
 
 gulp.task('copy-sw', () => {
   gulp.src('src/sw.js').pipe(gulp.dest('./dist'));
+  gulp.src('src/manifest.json').pipe(gulp.dest('./dist'));
 });
 
 gulp.task('copy-images', () => {
   gulp.src('src/assets/img_srcset/*').pipe(gulp.dest('dist/img_srcset'));
+  gulp.src('src/assets/icons/*').pipe(gulp.dest('dist/icons'));
 });
 
 gulp.task('styles', () => {

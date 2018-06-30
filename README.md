@@ -30,7 +30,7 @@
 - [x] The client application works offline. JSON responses are cached using the IndexedDB API. Any data previously accessed while connected is reachable while offline.
 - [x] The application maintains a responsive design on mobile, tablet and desktop viewports.
 - [x] The application retains accessibility features from the Stage 1 project. Images have alternate text, the application uses appropriate focus management for navigation, and semantic elements and ARIA attributes are used correctly.
-- [ ] Lighthouse targets for each category exceed: Progressive Web App: >90, Performance: >70, Accessibility: >90.
+- [x] Lighthouse targets for each category exceed: Progressive Web App: >90, Performance: >70, Accessibility: >90.
 
 ### Developer Notes
 
