@@ -325,3 +325,25 @@ nav h1 a {
 .review-comment {
   font-style: italic;
 }
+
+#add-review-button {
+  justify-self: center;
+  height: 46px;
+  margin: 0 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 300ms linear;
+  background-color: var(--secondary-color);
+  color: var(--surface-color);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+#add-review-button:hover {
+  background-color: var(--primary-color);
+}
+
+.no-reviews {
+  margin: 0 15px 30px;
+  font-style: italic;
+}
