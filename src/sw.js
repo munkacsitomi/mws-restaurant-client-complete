@@ -1,11 +1,11 @@
-const cacheName = 'restaurant-cache-v7';
+const cacheName = 'restaurant-cache-v1';
 
 const urlsToCache = [
   '/',
   './index.html',
   './restaurant.html',
   './css/styles.min.css',
-  './js/idb-keyval.js',
+  './js/idb.js',
   './js/dbhelper.js',
   './js/main.js',
   './js/restaurant_info.js',
