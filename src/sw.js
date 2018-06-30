@@ -1,4 +1,4 @@
-const cacheName = 'restaurant-cache-v1';
+const cacheName = 'restaurant-cache-v2';
 
 const urlsToCache = [
   '/',
