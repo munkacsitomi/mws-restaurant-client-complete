@@ -42,6 +42,18 @@ class DBHelper {
   }
 
   /**
+   * Update restaurants in IndexedDB.
+   */
+  static updateCachedRestaurants(restaurants) {
+    DBHelper.dbPromise().then(idb => {
+      const tx = idb.transaction(idbName, 'readwrite');
+      const store = tx.objectStore(idbName);
+      restaurants.forEach(restaurant => store.put(restaurant));
+      return tx.complete;
+    });
+  }
+
+  /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
@@ -50,12 +62,7 @@ class DBHelper {
       fetch(`${DBHelper.DATABASE_URL}/restaurants`)
         .then(response => response.json())
         .then(restaurants => {
-          DBHelper.dbPromise().then(idb => {
-            const tx = idb.transaction(idbName, 'readwrite');
-            const store = tx.objectStore(idbName);
-            restaurants.forEach(restaurant => store.put(restaurant));
-            return tx.complete;
-          });
+          DBHelper.updateCachedRestaurants(restaurants);
           callback(null, restaurants);
         })
         .catch(error => callback(error, null));
@@ -71,12 +78,7 @@ class DBHelper {
       fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}`)
         .then(response => response.json())
         .then(restaurants => {
-          DBHelper.dbPromise().then(idb => {
-            const tx = idb.transaction(idbName, 'readwrite');
-            const store = tx.objectStore(idbName);
-            restaurants.forEach(restaurant => store.put(restaurant));
-            return tx.complete;
-          });
+          DBHelper.updateCachedRestaurants(restaurants);
           callback(null, restaurants);
         })
         .catch(error => callback(error, null));
