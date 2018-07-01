@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap();
 });
 
+document.getElementById('add-review-button').addEventListener('click', () => {
+  console.log('Review sent!');
+});
+
 /**
  * Initialize leaflet map
  */
@@ -135,12 +139,6 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     });
     container.appendChild(ul);
   }
-
-  // TODO: re-enable for stage 3
-  // const addReview = document.createElement('button');
-  // addReview.innerHTML = 'Add review';
-  // addReview.id = 'add-review-button';
-  // container.appendChild(addReview);
 }
 
 /**
