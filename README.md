@@ -1,16 +1,43 @@
-# Mobile Web Specialist Certification Course
----
-#### _Three Stage Course Material Project - Restaurant Reviews_
+# Mobile Web Spacialists Nanodegree
 
-## How to start local API server
+My solution for the Google Mobile Web Specialist Nanodegree.
 
-Clone this repository and follow the instructions: https://github.com/munkacsitomi/mws-restaurant-stage-3
+## Getting Started
 
-## How to start local server
+Clone this repository and follow the instructions: https://github.com/munkacsitomi/mws-restaurant-stage-2
 
-1. Install node modules `npm i`
-2. Install Gulp globally `npm i -g gulp`
-3. You are able to start the local server `gulp`
+### Prerequisites
+
+Install [node.js LTS Version: v8.11.3 ](https://nodejs.org/en/download/)
+
+Install Gulp globally
+
+```
+npm install -g gulp
+```
+
+### Installing
+
+Install node modules
+
+```
+npm install
+```
+
+### Run locally
+
+Now we can start the project with Gulp
+
+```
+gulp
+```
+
+### Developer Notes
+
+If you want to generate new images you need to setup some tools first.
+1. Install ImageMagick `brew install imagemagick`
+2. Install GraphicsMagick `brew install graphicsmagick`
+3. Now you're able to generate new images: `gulp resize-images`
 
 ### Requirements for Stage 1
 
@@ -31,20 +58,3 @@ Clone this repository and follow the instructions: https://github.com/munkacsito
 - [x] The application maintains a responsive design on mobile, tablet and desktop viewports.
 - [x] The application retains accessibility features from the Stage 1 project. Images have alternate text, the application uses appropriate focus management for navigation, and semantic elements and ARIA attributes are used correctly.
 - [x] Lighthouse targets for each category exceed: Progressive Web App: >90, Performance: >70, Accessibility: >90.
-
-### Requirements for Stage 3
-
-- [ ] **Add a form to allow users to create their own reviews:** In previous versions of the application, users could only read reviews from the database. You will need to add a form that adds new reviews to the database. The form should include the user’s name, the restaurant id, the user’s rating, and whatever comments they have. Submitting the form should update the server when the user is online.
-- [ ] **Add functionality to defer updates until the user is connected:** If the user is not online, the app should notify the user that they are not connected, and save the users' data to submit automatically when re-connected. In this case, the review should be deferred and sent to the server when connection is re-established (but the review should still be visible locally even before it gets to the server.)
-- [ ] Users are able to mark a restaurant as a favorite, this toggle is visible in the application. A form is added to allow users to add their own reviews for a restaurant. Form submission works properly and adds a new review to the database.
-- [x] The client application works offline. JSON responses are cached using the IndexedDB API. Any data previously accessed while connected is reachable while offline. User is able to add a review to a restaurant while offline and the review is sent to the server when connectivity is re-established.
-- [x] The application maintains a responsive design on mobile, tablet and desktop viewports. All new features are responsive, including the form to add a review and the control for marking a restaurant as a favorite.
-- [x] The application retains accessibility features from the previous projects. Images have alternate text, the application uses appropriate focus management for navigation, and semantic elements and ARIA attributes are used correctly. Roles are correctly defined for all elements of the review form.
-- [ ] Lighthouse targets for each category exceed: Progressive Web App: >90, Performance: >90, Accessibility: >90.
-
-### Developer Notes
-
-If you want to generate new images you need to setup some tools first.
-1. Install ImageMagick `brew install imagemagick`
-2. Install GraphicsMagick `brew install graphicsmagick`
-3. Now you're able to generate new images: `gulp resize-images`

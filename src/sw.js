@@ -1,9 +1,10 @@
-const cacheName = 'restaurant-cache-v2';
+const cacheName = 'restaurant-cache-v6';
 
 const urlsToCache = [
   '/',
   './index.html',
   './restaurant.html',
+  './manifest.json',
   './css/styles.min.css',
   './js/idb.js',
   './js/dbhelper.js',
@@ -52,4 +53,16 @@ self.addEventListener('fetch', event => {
       return response || fetch(event.request);
     })
   );
+});
+
+self.addEventListener('message', event => {
+  if (!event.data) {
+    return;
+  } else if (event.data === 'force-activate') {
+    self.skipWaiting();
+    self.clients.claim();
+    self.clients.matchAll().then(clients => {
+      clients.forEach(client => client.postMessage('reload-window'));
+    });
+  }
 });

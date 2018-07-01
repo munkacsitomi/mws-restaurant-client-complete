@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
+    "start-hs": "http-server dist -p 8000",
     "build": "gulp dist"
   },
   "repository": {

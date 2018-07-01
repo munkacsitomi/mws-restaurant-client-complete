@@ -136,10 +136,11 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     container.appendChild(ul);
   }
 
-  const addReview = document.createElement('button');
-  addReview.innerHTML = 'Add review';
-  addReview.id = 'add-review-button';
-  container.appendChild(addReview);
+  // TODO: re-enable for stage 3
+  // const addReview = document.createElement('button');
+  // addReview.innerHTML = 'Add review';
+  // addReview.id = 'add-review-button';
+  // container.appendChild(addReview);
 }
 
 /**
