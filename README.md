@@ -58,3 +58,5 @@ If you want to generate new images you need to setup some tools first.
 - [x] The application maintains a responsive design on mobile, tablet and desktop viewports.
 - [x] The application retains accessibility features from the Stage 1 project. Images have alternate text, the application uses appropriate focus management for navigation, and semantic elements and ARIA attributes are used correctly.
 - [x] Lighthouse targets for each category exceed: Progressive Web App: >90, Performance: >70, Accessibility: >90.
+
+![Lighthouse Report](lighthouse.png)
