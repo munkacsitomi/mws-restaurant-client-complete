@@ -1,4 +1,5 @@
-const cacheName = 'restaurant-cache-v6';
+const currentCache = 'restaurant-cache';
+const currentCacheVersion = `${currentCache}-v7`;
 
 const urlsToCache = [
   '/',
@@ -35,34 +36,41 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches
-      .open(cacheName)
-      .then(cache => cache.addAll(urlsToCache))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(caches.open(currentCacheVersion).then(cache => cache.addAll(urlsToCache)));
 });
 
 self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(
+            cacheName => cacheName.startsWith(currentCache) && currentCacheVersion != cacheName
+          )
+          .map(cacheName => caches.delete(cacheName))
+      );
     })
   );
 });
 
-self.addEventListener('message', event => {
-  if (!event.data) {
-    return;
-  } else if (event.data === 'force-activate') {
-    self.skipWaiting();
-    self.clients.claim();
-    self.clients.matchAll().then(clients => {
-      clients.forEach(client => client.postMessage('reload-window'));
-    });
-  }
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.open(currentCacheVersion).then(cache => {
+      return cache.match(event.request).then(response => {
+        if (response) return response;
+
+        return fetch(event.request).then(res => {
+          if (res.url.includes('.jpg')) {
+            if (res.url.includes(window.location.origin)) {
+              cache.put(event.request.url, res.clone());
+              return res;
+            }
+            return;
+          }
+          cache.put(event.request.url, res.clone());
+          return res;
+        });
+      });
+    })
+  );
 });

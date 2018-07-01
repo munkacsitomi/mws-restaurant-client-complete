@@ -1,10 +1,10 @@
 const gulp = require('gulp');
 const imageResize = require('gulp-image-resize');
 const rename = require('gulp-rename');
-const browserSync = require('browser-sync').create();
 const concat = require('gulp-concat');
 const minify = require('gulp-minify');
 const cleanCSS = require('gulp-clean-css');
+const shell = require('gulp-shell');
 
 gulp.task('resize-images', () => {
   const imgs = gulp.src('src/assets/img/*');
@@ -67,20 +67,11 @@ gulp.task('styles', () => {
     .src('src/assets/css/**/*.css')
     .pipe(concat('styles.min.css'))
     .pipe(cleanCSS())
-    .pipe(gulp.dest('dist/css'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('dist/css'));
 });
+
+gulp.task('run-server', shell.task('http-server dist -p 8000'))
 
 gulp.task('dist', ['copy-html', 'copy-images', 'copy-sw', 'styles', 'scripts-dist']);
 
-gulp.task('default', ['copy-html', 'copy-images', 'copy-sw', 'styles', 'scripts'], () => {
-  gulp.watch('src/assets/css/**/*.css', ['styles']);
-  gulp.watch('src/assets/js/**/*.js', ['scripts']);
-  gulp.watch(['src/index.html', 'src/restaurant.html'], ['copy-html']);
-  gulp.watch(['dist/*.html']).on('change', browserSync.reload);
-
-  browserSync.init({
-    server: './dist',
-    port: 8000
-  });
-});
+gulp.task('default', ['dist', 'run-server']);

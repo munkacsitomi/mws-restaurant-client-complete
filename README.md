@@ -16,6 +16,12 @@ Install Gulp globally
 npm install -g gulp
 ```
 
+Install Http server globally
+
+```
+npm install -g http-server
+```
+
 ### Installing
 
 Install node modules
@@ -31,6 +37,8 @@ Now we can start the project with Gulp
 ```
 gulp
 ```
+
+With your server running, visit the site: `http://localhost:8000`
 
 ### Developer Notes
 
