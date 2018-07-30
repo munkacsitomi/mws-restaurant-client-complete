@@ -33,6 +33,8 @@
         <select id="cuisines-select" name="cuisines" aria-label="Select Cusisine" onchange="updateRestaurants()">
           <option value="all">All Cuisines</option>
         </select>
+        <input id="favorites" type="checkbox" name="favorite" aria-label="Show favorites only" onclick="updateRestaurants()">
+        <div class="favorites">Show Favorites Only</div>
       </div>
       <ul id="restaurants-list" class="flex-container-row-wrap"></ul>
     </section>

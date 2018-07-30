@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap();
 });
 
-document.getElementById('add-review-button').addEventListener('click', () => {
-  console.log('Review sent!');
-});
-
 /**
  * Initialize leaflet map
  */
@@ -71,6 +67,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
+  fillRestaurantFavoriteHTML();
+
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
 
@@ -94,7 +92,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
-  // fill reviews
   fillReviewsHTML();
 }
 
@@ -117,6 +114,26 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
     hours.appendChild(row);
   }
 }
+
+
+/**
+ * Create restaurant add or remove favorite
+ */
+fillRestaurantFavoriteHTML = (is_favorite = self.restaurant.is_favorite, id = self.restaurant.id) => {
+  const favorite = document.getElementById('restaurant-favorite');
+
+  let btn = document.createElement('button');
+  btn.setAttribute('id', 'button-favorite');
+
+  if (is_favorite == 'true') {
+    btn.innerHTML = 'Remove from Favorites';
+    btn.setAttribute('onclick',`DBHelper.toggleFavorite(${id}, false);`);
+  } else {
+    btn.innerHTML = 'Add to Favorites';
+    btn.setAttribute('onclick',`DBHelper.toggleFavorite(${id}, true);`);
+  }
+  favorite.appendChild(btn);
+};
 
 /**
  * Create all reviews HTML and add them to the webpage.

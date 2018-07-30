@@ -48,6 +48,7 @@
       </div>
       <div class="restaurant-container-small">
         <p id="restaurant-cuisine"></p>
+        <div id="restaurant-favorite"></div>
         <div class="restaurant-details">
           <p id="restaurant-address"></p>
           <table id="restaurant-hours"></table>
@@ -56,11 +57,11 @@
           <p>Create new review</p>
           <div class="inputs-container flex-container">
             <label for="name">Name:</label>
-            <input name="name" type="text">
+            <input name="name" type="text" placeholder="add your name">
             <label for="rating">Rating:</label>
-            <input type="range" id="a" name="rating" min="1" max="5" value="1" step="1">
+            <input name="rating" type="number" placeholder="min: 1, max: 5" min="1" max="5">
             <label for="comments">Comment:</label>
-            <textarea name="comments" rows="5" cols="10"></textarea>
+            <textarea name="comments" rows="5" cols="10" placeholder="add comment"></textarea>
           </div>
           <button id="add-review-button">Add</button>
         </div>
