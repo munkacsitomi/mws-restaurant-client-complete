@@ -389,3 +389,7 @@ nav h1 a {
 .button-black {
   background-color: var(--text-color);
 }
+
+.favorites {
+  color: var(--surface-color);
+}

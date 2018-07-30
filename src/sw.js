@@ -1,7 +1,7 @@
 importScripts('/js/idb.js');
+importScripts('/js/idbhelper.js');
 
-const currentCache = 'restaurant-cache';
-const currentCacheVersion = `${currentCache}-v7`;
+let staticCacheName = 'restaurants-v5';
 
 const urlsToCache = [
   '/',
@@ -11,6 +11,7 @@ const urlsToCache = [
   './css/styles.min.css',
   './js/idb.js',
   './js/dbhelper.js',
+  './js/idbhelper.js',
   './js/main.js',
   './js/restaurant_info.js',
   './img_srcset/1-540_small_1x.jpg',
@@ -38,7 +39,11 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(currentCacheVersion).then(cache => cache.addAll(urlsToCache)));
+  event.waitUntil(
+    caches.open(staticCacheName).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
+  );
 });
 
 self.addEventListener('activate', event => {
@@ -47,7 +52,7 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cachesNames
           .filter(cachesName => {
-            return cachesName.startsWith(currentCache) && cachesName != currentCacheVersion;
+            return cachesName.startsWith('restaurants-') && cachesName != staticCacheName;
           })
           .map(cachesName => {
             return caches.delete(cachesName);

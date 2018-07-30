@@ -5,10 +5,16 @@ var markers = [];
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', event => {
-  initMap(); // added
-  fetchNeighborhoods();
-  fetchCuisines();
+document.addEventListener('DOMContentLoaded', () => {
+  IDBHelper.databaseExists((dbName = 'restaurants-db'), isExists => {
+    if (!isExists) {
+      IDBHelper.createNewDatabase();
+      IDBHelper.populateDatabase(IDBHelper.dbPromise);
+    }
+    initMap();
+    fetchNeighborhoods();
+    fetchCuisines();
+  });
 });
 
 /**
@@ -97,22 +103,30 @@ initMap = () => {
 updateRestaurants = () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
+  const fSelect = document.getElementById('favorites');
 
   const cIndex = cSelect.selectedIndex;
   const nIndex = nSelect.selectedIndex;
+  const fValue = fSelect.checked;
 
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
+  const favorite = fValue;
 
-  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-    if (error) {
-      // Got an error!
-      console.error(error);
-    } else {
-      resetRestaurants(restaurants);
-      fillRestaurantsHTML();
+  DBHelper.fetchRestaurantByCuisineAndNeighborhoodAndFavorite(
+    cuisine,
+    neighborhood,
+    favorite,
+    (error, restaurants) => {
+      if (error) {
+        // Got an error!
+        console.error(error);
+      } else {
+        resetRestaurants(restaurants);
+        fillRestaurantsHTML();
+      }
     }
-  });
+  );
 };
 
 /**

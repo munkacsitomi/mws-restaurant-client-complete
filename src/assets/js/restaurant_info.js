@@ -186,9 +186,13 @@ createReviewHTML = review => {
   name.innerHTML = review.name;
   div.appendChild(name);
 
-  const date = document.createElement('p');
-  date.innerHTML = review.date;
-  div.appendChild(date);
+  const reviewDate = document.createElement('p');
+  let formattedDate = new Date(review.updatedAt);
+  let day = formattedDate.getDate();
+  let month = formattedDate.getMonth();
+  let year = formattedDate.getFullYear();
+  reviewDate.innerHTML = `${day}/${month}/${year}`;
+  div.appendChild(reviewDate);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;

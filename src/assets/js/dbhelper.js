@@ -1,99 +1,41 @@
 /**
  * Common database helper functions.
  */
-const idbName = 'restaurants';
 class DBHelper {
-
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}`;
+    return `http://localhost:${port}/restaurants`;
   }
-
-  /**
-   * Open IndexedDB Promised.
-   * {@link https://github.com/jakearchibald/idb}
-   */
-  static dbPromise() {
-    return idb.open(idbName, 1, idb => {
-      idb.createObjectStore(idbName, { keyPath: 'id' });
-    });
-  }
-
-  /**
-   * Get all cached restaurants.
-   */
-  static getCachedRestaurants() {
-    return DBHelper.dbPromise().then(idb => {
-      return idb.transaction(idbName).objectStore(idbName).getAll();
-    });
-  }
-
-  /**
-   * Get a cached restaurant by its ID.
-   */
-  static getCachedRestaurantById(id) {
-    return DBHelper.dbPromise().then(idb => {
-      return idb.transaction(idbName).objectStore(idbName).get(Number(id));
-    });
-  }
-
-  /**
-   * Update restaurants in IndexedDB.
-   */
-  static updateCachedRestaurants(restaurants) {
-    DBHelper.dbPromise().then(idb => {
-      const tx = idb.transaction(idbName, 'readwrite');
-      const store = tx.objectStore(idbName);
-      restaurants.forEach(restaurant => store.put(restaurant));
-      return tx.complete;
-    });
-  }
-
-  /**
-   * Update restaurant by its ID in IndexedDB.
-   */
-  static updateCachedRestaurantById(restaurant) {
-    DBHelper.dbPromise().then(idb => {
-      const tx = idb.transaction(idbName, 'readwrite');
-      const store = tx.objectStore(idbName);
-      store.put(restaurant);
-      return tx.complete;
-    });
-  }
-
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-    DBHelper.getCachedRestaurants().then(cachedRestaurants => {
-      if (cachedRestaurants.length > 0) return callback(null, cachedRestaurants);
-      fetch(`${DBHelper.DATABASE_URL}/restaurants`)
-        .then(response => response.json())
-        .then(restaurants => {
-          DBHelper.updateCachedRestaurants(restaurants);
-          callback(null, restaurants);
-        })
-        .catch(error => callback(error, null));
+    IDBHelper.readAllIdbData(IDBHelper.dbPromise).then(restaurants => {
+      return callback(null, restaurants);
     });
   }
-
   /**
    * Fetch a restaurant by its ID.
    */
   static fetchRestaurantById(id, callback) {
-    DBHelper.getCachedRestaurantById(id).then(cachedRestaurant => {
-      if (cachedRestaurant) return callback(null, cachedRestaurant);
-      fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}`)
-        .then(response => response.json())
-        .then(restaurant => {
-          DBHelper.updateCachedRestaurantById(restaurant);
-          callback(null, restaurants);
-        })
-        .catch(error => callback(error, null));
+    // fetch all restaurants with proper error handling.
+    DBHelper.fetchRestaurants((error, restaurants) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        const restaurant = restaurants.find(r => r.id == id);
+        if (restaurant) {
+          // Got the restaurant
+          callback(null, restaurant);
+        } else {
+          // Restaurant does not exist in the database
+          callback('Restaurant does not exist', null);
+        }
+      }
     });
   }
 
@@ -132,7 +74,12 @@ class DBHelper {
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
    */
-  static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
+  static fetchRestaurantByCuisineAndNeighborhoodAndFavorite(
+    cuisine,
+    neighborhood,
+    favorite,
+    callback
+  ) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
@@ -146,6 +93,10 @@ class DBHelper {
         if (neighborhood != 'all') {
           // filter by neighborhood
           results = results.filter(r => r.neighborhood == neighborhood);
+        }
+        if (favorite === true) {
+          // filter by favorites
+          results = results.filter(r => r.is_favorite == 'true');
         }
         callback(null, results);
       }
@@ -214,5 +165,31 @@ class DBHelper {
     });
     marker.addTo(newMap);
     return marker;
+  }
+
+  /**
+   * Add or Remove is_favorite on the server
+   */
+  static toggleFavorite(id, condition) {
+    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${condition}`, { method: 'POST' })
+      .then(res => console.log('restaurant favorite has been updated'))
+      .then(IDBHelper.idbToggleFavorite(id, condition))
+      .then(location.reload());
+  }
+  /**
+   * Add or Remove is_favorite on the server
+   */
+  static saveOfflineReview(event, form) {
+    event.preventDefault();
+    const body = {
+      restaurant_id: parseInt(form.id.value),
+      name: form.dname.value,
+      rating: parseInt(form.drating.value),
+      comments: form.dreview.value,
+      updatedAt: parseInt(form.ddate.value),
+      flag: form.dflag.value
+    };
+    IDBHelper.idbPostReview(form.id.value, body);
+    location.reload();
   }
 }
