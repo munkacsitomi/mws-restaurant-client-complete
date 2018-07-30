@@ -124,13 +124,16 @@ fillRestaurantFavoriteHTML = (is_favorite = self.restaurant.is_favorite, id = se
 
   let btn = document.createElement('button');
   btn.setAttribute('id', 'button-favorite');
+  btn.className = 'restaurant-button';
 
   if (is_favorite == 'true') {
     btn.innerHTML = 'Remove from Favorites';
-    btn.setAttribute('onclick',`DBHelper.toggleFavorite(${id}, false);`);
+    btn.setAttribute('onclick', `DBHelper.toggleFavorite(${id}, false);`);
+    btn.classList.add('button-red');
   } else {
     btn.innerHTML = 'Add to Favorites';
     btn.setAttribute('onclick',`DBHelper.toggleFavorite(${id}, true);`);
+    btn.classList.add('button-black');
   }
   favorite.appendChild(btn);
 };

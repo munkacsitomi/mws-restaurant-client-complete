@@ -4,6 +4,7 @@
 :root {
   --primary-color: #00695c;
   --secondary-color: #0277bd;
+  --favorite-color: #e53935;
   --surface-color: #ffffff;
   --background-color: #eeeeee;
   --nav-background-color: #2b2b2b;
@@ -270,8 +271,8 @@ nav h1 a {
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
 }
-#restaurant-cuisine {
-  background-color: var(--text-color);
+.restaurant-button {
+  background-color: var(--secondary-color);
   color: var(--surface-color);
   font-size: 12pt;
   font-weight: 300;
@@ -281,6 +282,9 @@ nav h1 a {
   text-align: center;
   text-transform: uppercase;
   width: 100%;
+  min-height: 48px;
+  line-height: 48px;
+  cursor: pointer;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 }
@@ -346,11 +350,18 @@ nav h1 a {
   border-top-right-radius: var(--border-radius);
 }
 
+.add-review-container input,
+.add-review-container textarea {
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+}
+
 #add-review-button {
   border: 0;
   height: 48px;
   font-size: 14px;
   cursor: pointer;
+  margin-top: 12px;
   transition: background-color 300ms linear;
   background-color: var(--nav-background-color);
   color: var(--surface-color);
@@ -369,4 +380,12 @@ nav h1 a {
 .no-reviews {
   margin: 0 15px 30px;
   font-style: italic;
+}
+
+.button-red {
+  background-color: var(--favorite-color);
+}
+
+.button-black {
+  background-color: var(--text-color);
 }

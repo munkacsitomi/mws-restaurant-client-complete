@@ -47,7 +47,7 @@
         </picture>
       </div>
       <div class="restaurant-container-small">
-        <p id="restaurant-cuisine"></p>
+        <p id="restaurant-cuisine" class="restaurant-button"></p>
         <div id="restaurant-favorite"></div>
         <div class="restaurant-details">
           <p id="restaurant-address"></p>
@@ -55,15 +55,15 @@
         </div>
         <div class="add-review-container flex-container">
           <p>Create new review</p>
-          <div class="inputs-container flex-container">
+          <form class="inputs-container flex-container">
             <label for="name">Name:</label>
             <input name="name" type="text" placeholder="add your name">
             <label for="rating">Rating:</label>
             <input name="rating" type="number" placeholder="min: 1, max: 5" min="1" max="5">
             <label for="comments">Comment:</label>
             <textarea name="comments" rows="5" cols="10" placeholder="add comment"></textarea>
-          </div>
-          <button id="add-review-button">Add</button>
+            <input id="add-review-button" type="submit"/>
+          </form>
         </div>
       </div>
     </section>
