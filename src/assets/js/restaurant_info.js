@@ -4,7 +4,7 @@ var newMap;
 /**
  * Initialize map as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', event => {
   initMap();
 });
 
@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
  */
 initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
+    if (error) {
+      // Got an error!
       console.error(error);
     } else {
       self.newMap = L.map('map', {
@@ -21,31 +22,38 @@ initMap = () => {
         zoom: 16,
         scrollWheelZoom: false
       });
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-        mapboxToken: 'pk.eyJ1IjoibXVua2Fjc2l0b21pIiwiYSI6ImNqaWl2bHFzMjFuOWsza2xpd3N1MDZnMDAifQ.4zyXFPfSXwny86YwtcPyIQ',
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-          '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox.streets'
-      }).addTo(newMap);
+      L.tileLayer(
+        'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}',
+        {
+          mapboxToken:
+            'pk.eyJ1IjoibXVua2Fjc2l0b21pIiwiYSI6ImNqaWl2bHFzMjFuOWsza2xpd3N1MDZnMDAifQ.4zyXFPfSXwny86YwtcPyIQ',
+          maxZoom: 18,
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          id: 'mapbox.streets'
+        }
+      ).addTo(newMap);
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
   });
-}
+};
 
 /**
  * Get current restaurant from page URL.
  */
-fetchRestaurantFromURL = (callback) => {
-  if (self.restaurant) { // restaurant already fetched!
-    callback(null, self.restaurant)
+fetchRestaurantFromURL = callback => {
+  if (self.restaurant) {
+    // restaurant already fetched!
+    callback(null, self.restaurant);
     return;
   }
   const id = getParameterByName('id');
-  if (!id) { // no id found in URL
-    error = 'No restaurant id in URL'
+  if (!id) {
+    // no id found in URL
+    error = 'No restaurant id in URL';
     callback(error, null);
   } else {
     DBHelper.fetchRestaurantById(id, (error, restaurant) => {
@@ -55,10 +63,10 @@ fetchRestaurantFromURL = (callback) => {
         return;
       }
       fillRestaurantHTML();
-      callback(null, restaurant)
+      callback(null, restaurant);
     });
   }
-}
+};
 
 /**
  * Create restaurant HTML and add it to the webpage
@@ -76,7 +84,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const source = document.createElement('source');
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
+  image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant, '800', 'large');
   image.alt = restaurant.name;
 
@@ -94,7 +102,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   }
   fillReviewsHTML();
   buildReviewFormHTML();
-}
+  registerServiceWorker();
+};
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
@@ -114,13 +123,15 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 
     hours.appendChild(row);
   }
-}
-
+};
 
 /**
  * Create restaurant add or remove favorite
  */
-fillRestaurantFavoriteHTML = (is_favorite = self.restaurant.is_favorite, id = self.restaurant.id) => {
+fillRestaurantFavoriteHTML = (
+  is_favorite = self.restaurant.is_favorite,
+  id = self.restaurant.id
+) => {
   const favorite = document.getElementById('restaurant-favorite');
 
   let btn = document.createElement('button');
@@ -133,7 +144,7 @@ fillRestaurantFavoriteHTML = (is_favorite = self.restaurant.is_favorite, id = se
     btn.classList.add('button-red');
   } else {
     btn.innerHTML = 'Add to Favorites';
-    btn.setAttribute('onclick',`DBHelper.toggleFavorite(${id}, true);`);
+    btn.setAttribute('onclick', `DBHelper.toggleFavorite(${id}, true);`);
     btn.classList.add('button-black');
   }
   favorite.appendChild(btn);
@@ -160,12 +171,12 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     });
     container.appendChild(ul);
   }
-}
+};
 
 /**
  * Create review HTML and add it to the webpage.
  */
-createReviewHTML = (review) => {
+createReviewHTML = review => {
   const li = document.createElement('li');
   const div = document.createElement('div');
   div.classList.add('flex-container-space-between');
@@ -191,7 +202,7 @@ createReviewHTML = (review) => {
   li.appendChild(comments);
 
   return li;
-}
+};
 
 /**
  * Build review form
@@ -227,47 +238,41 @@ buildReviewFormHTML = (id = self.restaurant.id) => {
   hiddenFlag.setAttribute('value', 'unsynced');
   createform.appendChild(hiddenFlag);
 
-  const namelabel = document.createElement('label');
-  namelabel.innerHTML = 'Name: ';
-  createform.appendChild(namelabel);
+  const nameLabel = document.createElement('label');
+  nameLabel.innerHTML = 'Name: ';
+  createform.appendChild(nameLabel);
 
-  const inputelement = document.createElement('input');
-  inputelement.setAttribute('type', 'text');
-  inputelement.setAttribute('name', 'dname');
-  inputelement.setAttribute('placeholder', 'Add your name');
-  inputelement.setAttribute('aria-label', 'Reviewer name');
-  createform.appendChild(inputelement);
+  const name = document.createElement('input');
+  name.setAttribute('type', 'text');
+  name.setAttribute('name', 'dname');
+  name.setAttribute('placeholder', 'Add your name');
+  name.setAttribute('aria-label', 'Reviewer name');
+  createform.appendChild(name);
 
   const ratinglabel = document.createElement('label');
   ratinglabel.innerHTML = 'Rating: ';
   createform.appendChild(ratinglabel);
 
-  const ratingelement = document.createElement('input');
-  ratingelement.setAttribute('type', 'number');
-  ratingelement.setAttribute('name', 'drating');
-  ratingelement.setAttribute('min', '1');
-  ratingelement.setAttribute('max', '5');
-  ratingelement.setAttribute('placeholder', 'Enter a number between 1 to 5');
-  ratingelement.setAttribute('aria-label', 'Restaurant rating');
-  createform.appendChild(ratingelement);
-
-  const ratingbreak = document.createElement('br');
-  createform.appendChild(ratingbreak);
+  const rating = document.createElement('input');
+  rating.setAttribute('type', 'number');
+  rating.setAttribute('name', 'drating');
+  rating.setAttribute('min', '1');
+  rating.setAttribute('max', '5');
+  rating.setAttribute('placeholder', 'Enter a number between 1 to 5');
+  rating.setAttribute('aria-label', 'Restaurant rating');
+  createform.appendChild(rating);
 
   const reviewlabel = document.createElement('label');
   reviewlabel.innerHTML = 'Review: ';
   createform.appendChild(reviewlabel);
 
-  const texareaelement = document.createElement('textarea');
-  texareaelement.setAttribute('name', 'dreview');
-  texareaelement.setAttribute('rows', '5');
-  texareaelement.setAttribute('cols', '10');
-  texareaelement.setAttribute('placeholder', 'A your review');
-  texareaelement.setAttribute('aria-label', 'Restaurant review');
-  createform.appendChild(texareaelement);
-
-  const reviewbreak = document.createElement('br');
-  createform.appendChild(reviewbreak);
+  const review = document.createElement('textarea');
+  review.setAttribute('name', 'dreview');
+  review.setAttribute('rows', '5');
+  review.setAttribute('cols', '10');
+  review.setAttribute('placeholder', 'A your review');
+  review.setAttribute('aria-label', 'Restaurant review');
+  createform.appendChild(review);
 
   const submit = document.createElement('input');
   submit.setAttribute('id', 'add-review-button');
@@ -278,30 +283,41 @@ buildReviewFormHTML = (id = self.restaurant.id) => {
 
   formContainer.appendChild(heading);
   formContainer.appendChild(createform);
-}
+};
 
 /**
  * Add restaurant name to the breadcrumb navigation menu
  */
-fillBreadcrumb = (restaurant=self.restaurant) => {
+fillBreadcrumb = (restaurant = self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
   li.innerHTML = restaurant.name;
   breadcrumb.appendChild(li);
-}
+};
 
 /**
  * Get a parameter by name from page URL.
  */
 getParameterByName = (name, url) => {
-  if (!url)
-    url = window.location.href;
+  if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, '\\$&');
   const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
     results = regex.exec(url);
-  if (!results)
-    return null;
-  if (!results[2])
-    return '';
+  if (!results) return null;
+  if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+};
+
+/**
+ * Register service worker
+ */
+registerServiceWorker = () => {
+  navigator.serviceWorker
+    .register('sw.js', { scope: '/' })
+    .then(reg => {
+      document.getElementById('newReviewForm').addEventListener('submit', () => {
+        reg.sync.register('review-sync').then(() => console.log('SW: review sync registered!'));
+      });
+    })
+    .catch(err => console.log('SW: registration failed!'));
+};

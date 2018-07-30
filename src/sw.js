@@ -1,3 +1,5 @@
+importScripts('/js/idb.js');
+
 const currentCache = 'restaurant-cache';
 const currentCacheVersion = `${currentCache}-v7`;
 
@@ -41,13 +43,15 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then(cachesNames => {
       return Promise.all(
-        cacheNames
-          .filter(
-            cacheName => cacheName.startsWith(currentCache) && currentCacheVersion != cacheName
-          )
-          .map(cacheName => caches.delete(cacheName))
+        cachesNames
+          .filter(cachesName => {
+            return cachesName.startsWith(currentCache) && cachesName != currentCacheVersion;
+          })
+          .map(cachesName => {
+            return caches.delete(cachesName);
+          })
       );
     })
   );
@@ -55,22 +59,15 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.open(currentCacheVersion).then(cache => {
-      return cache.match(event.request).then(response => {
-        if (response) return response;
-
-        return fetch(event.request).then(res => {
-          if (res.url.includes('.jpg')) {
-            if (res.url.includes(window.location.origin)) {
-              cache.put(event.request.url, res.clone());
-              return res;
-            }
-            return;
-          }
-          cache.put(event.request.url, res.clone());
-          return res;
-        });
-      });
+    caches.match(event.request, { ignoreSearch: true }).then(response => {
+      if (response) return response;
+      return fetch(event.request);
     })
   );
+});
+
+self.addEventListener('sync', event => {
+  if (event.tag === 'review-sync') {
+    event.waitUntil(IDBHelper.syncOfflineReviews());
+  }
 });
