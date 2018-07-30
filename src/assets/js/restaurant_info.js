@@ -93,6 +93,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
   fillReviewsHTML();
+  buildReviewFormHTML();
 }
 
 /**
@@ -190,6 +191,93 @@ createReviewHTML = (review) => {
   li.appendChild(comments);
 
   return li;
+}
+
+/**
+ * Build review form
+ */
+buildReviewFormHTML = (id = self.restaurant.id) => {
+  const formContainer = document.getElementById('add-review-container');
+
+  const heading = document.createElement('p');
+  heading.innerHTML = 'Create a new review';
+
+  const createform = document.createElement('form');
+  createform.classList.add('inputs-container');
+  createform.classList.add('flex-container');
+  createform.setAttribute('id', 'newReviewForm');
+  createform.setAttribute('onsubmit', `DBHelper.saveOfflineReview(event, this);`);
+
+  const hiddenRestaurantId = document.createElement('input');
+  hiddenRestaurantId.setAttribute('type', 'hidden');
+  hiddenRestaurantId.setAttribute('name', 'id');
+  hiddenRestaurantId.setAttribute('value', `${id}`);
+  createform.appendChild(hiddenRestaurantId);
+
+  const hiddenReviewDate = document.createElement('input');
+  unixTime = Math.round(Date.now());
+  hiddenReviewDate.setAttribute('type', 'hidden');
+  hiddenReviewDate.setAttribute('name', 'ddate');
+  hiddenReviewDate.setAttribute('value', `${unixTime}`);
+  createform.appendChild(hiddenReviewDate);
+
+  const hiddenFlag = document.createElement('input');
+  hiddenFlag.setAttribute('type', 'hidden');
+  hiddenFlag.setAttribute('name', 'dflag');
+  hiddenFlag.setAttribute('value', 'unsynced');
+  createform.appendChild(hiddenFlag);
+
+  const namelabel = document.createElement('label');
+  namelabel.innerHTML = 'Name: ';
+  createform.appendChild(namelabel);
+
+  const inputelement = document.createElement('input');
+  inputelement.setAttribute('type', 'text');
+  inputelement.setAttribute('name', 'dname');
+  inputelement.setAttribute('placeholder', 'Add your name');
+  inputelement.setAttribute('aria-label', 'Reviewer name');
+  createform.appendChild(inputelement);
+
+  const ratinglabel = document.createElement('label');
+  ratinglabel.innerHTML = 'Rating: ';
+  createform.appendChild(ratinglabel);
+
+  const ratingelement = document.createElement('input');
+  ratingelement.setAttribute('type', 'number');
+  ratingelement.setAttribute('name', 'drating');
+  ratingelement.setAttribute('min', '1');
+  ratingelement.setAttribute('max', '5');
+  ratingelement.setAttribute('placeholder', 'Enter a number between 1 to 5');
+  ratingelement.setAttribute('aria-label', 'Restaurant rating');
+  createform.appendChild(ratingelement);
+
+  const ratingbreak = document.createElement('br');
+  createform.appendChild(ratingbreak);
+
+  const reviewlabel = document.createElement('label');
+  reviewlabel.innerHTML = 'Review: ';
+  createform.appendChild(reviewlabel);
+
+  const texareaelement = document.createElement('textarea');
+  texareaelement.setAttribute('name', 'dreview');
+  texareaelement.setAttribute('rows', '5');
+  texareaelement.setAttribute('cols', '10');
+  texareaelement.setAttribute('placeholder', 'A your review');
+  texareaelement.setAttribute('aria-label', 'Restaurant review');
+  createform.appendChild(texareaelement);
+
+  const reviewbreak = document.createElement('br');
+  createform.appendChild(reviewbreak);
+
+  const submit = document.createElement('input');
+  submit.setAttribute('id', 'add-review-button');
+  submit.setAttribute('type', 'submit');
+  submit.setAttribute('name', 'dsubmit');
+  submit.setAttribute('value', 'Submit');
+  createform.appendChild(submit);
+
+  formContainer.appendChild(heading);
+  formContainer.appendChild(createform);
 }
 
 /**
