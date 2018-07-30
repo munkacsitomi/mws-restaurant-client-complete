@@ -6,15 +6,18 @@ var markers = [];
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  IDBHelper.databaseExists((dbName = 'restaurants-db'), isExists => {
-    if (!isExists) {
-      IDBHelper.createNewDatabase();
-      IDBHelper.populateDatabase(IDBHelper.dbPromise);
-    }
+  const init = () => {
     initMap();
     fetchNeighborhoods();
     fetchCuisines();
-  });
+  };
+
+  IDBHelper.databaseExists((dbName = 'restaurants-db'))
+    .then(init)
+    .catch(err => {
+      IDBHelper.createNewDatabase();
+      IDBHelper.populateDatabase(IDBHelper.dbPromise).then(init);
+    });
 });
 
 /**

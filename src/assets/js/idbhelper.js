@@ -9,17 +9,18 @@ class IDBHelper {
   /**
    * Check if idb restaurants index exists
    */
-  static databaseExists(dbname, callback) {
-    const req = indexedDB.open(dbname);
-    let isExists = true;
-    req.onsuccess = () => {
-      req.result.close();
-      if (!isExists) indexedDB.deleteDatabase(dbname);
-      callback(isExists);
-    };
-    req.onupgradeneeded = () => {
-      isExists = false;
-    };
+  static databaseExists(dbname) {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(dbname);
+      req.onsuccess = () => {
+        req.result.close();
+        resolve(true);
+      };
+      req.onupgradeneeded = function(event) {
+        event.target.transaction.abort();
+        reject(false);
+      };
+    });
   }
   /**
    * Delete idb restaurants index if exists
@@ -48,7 +49,7 @@ class IDBHelper {
    * Initialize data population
    */
   static populateDatabase(dbPromise) {
-    fetch(DBHelper.DATABASE_URL)
+    return fetch(DBHelper.DATABASE_URL)
       .then(res => res.json())
       .then(json => {
         json.map(restaurant => IDBHelper.populateRestaurantsWithReviews(restaurant, dbPromise));
