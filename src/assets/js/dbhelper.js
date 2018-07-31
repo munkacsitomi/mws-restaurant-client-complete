@@ -8,7 +8,7 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
+    return `http://localhost:${port}`;
   }
   /**
    * Fetch all restaurants.
@@ -171,7 +171,7 @@ class DBHelper {
    * Add or Remove is_favorite on the server
    */
   static toggleFavorite(id, condition) {
-    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${condition}`, { method: 'POST' })
+    fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}/?is_favorite=${condition}`, { method: 'POST' })
       .then(res => console.log('restaurant favorite has been updated'))
       .then(IDBHelper.idbToggleFavorite(id, condition))
       .then(location.reload());

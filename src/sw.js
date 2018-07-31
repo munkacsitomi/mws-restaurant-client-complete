@@ -1,7 +1,7 @@
 importScripts('/js/idb.js');
 importScripts('/js/idbhelper.js');
 
-let staticCacheName = 'restaurants-v5';
+const staticCacheName = 'restaurants-v7';
 
 const urlsToCache = [
   '/',

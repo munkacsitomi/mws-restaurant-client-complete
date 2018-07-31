@@ -55,6 +55,7 @@ gulp.task('copy-html', () => {
 gulp.task('copy-sw', () => {
   gulp.src('src/sw.js').pipe(gulp.dest('./dist'));
   gulp.src('src/manifest.json').pipe(gulp.dest('./dist'));
+  gulp.src('src/favicon.ico').pipe(gulp.dest('./dist'));
 });
 
 gulp.task('copy-images', () => {
