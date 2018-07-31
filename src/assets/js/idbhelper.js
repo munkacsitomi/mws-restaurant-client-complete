@@ -64,7 +64,8 @@ class IDBHelper {
       .then(res => res.json())
       .then(json => {
         json.map(restaurant => IDBHelper.populateRestaurantsWithReviews(restaurant, dbPromise));
-      });
+      })
+      .catch(err => console.log(err));
   }
 
   /**
@@ -83,7 +84,8 @@ class IDBHelper {
           store.put(item);
           tx.complete;
         })
-      );
+      )
+      .catch(err => console.log(err));
   }
 
   /**

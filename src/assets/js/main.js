@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(init)
     .catch(err => {
       IDBHelper.createNewDatabase();
-      IDBHelper.populateDatabase(IDBHelper.dbPromise).then(init);
+      IDBHelper.populateDatabase(IDBHelper.dbPromise)
+        .then(init)
+        .catch(err => console.log(err));
     });
 });
 

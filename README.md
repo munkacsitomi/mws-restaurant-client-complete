@@ -6,6 +6,12 @@ My solution for the Google Mobile Web Specialist Nanodegree.
 
 Clone this repository and follow the instructions: https://github.com/munkacsitomi/mws-restaurant-stage-3
 
+**Before start please make sure the backend is running!**
+
+```
+curl "http://localhost:1337/restaurants"
+```
+
 ### Prerequisites
 
 Install [node.js LTS Version: v8.11.3 ](https://nodejs.org/en/download/)
