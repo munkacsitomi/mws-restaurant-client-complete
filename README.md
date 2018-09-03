@@ -4,7 +4,7 @@ My solution for the Google Mobile Web Specialist Nanodegree.
 
 ## Getting Started
 
-Clone this repository and follow the instructions: https://github.com/munkacsitomi/mws-restaurant-stage-3
+Clone this repository and follow the instructions: https://github.com/munkacsitomi/mws-restaurant-server
 
 **Before start please make sure the backend is running!**
 

@@ -8,7 +8,6 @@ class IDBHelper {
    * Open IndexedDB Promised.
    * {@link https://github.com/jakearchibald/idb}
    */
-
   static get dbPromise() {
     const dbPromise = idb.open(restaurantsDb, 1);
     return dbPromise;
@@ -115,7 +114,7 @@ class IDBHelper {
   }
 
   /**
-   * toggle and update favorite in idb by id
+   * Toggle and update favorite in idb by id
    */
   static idbToggleFavorite(id, condition) {
     IDBHelper.dbPromise.then(async db => {
@@ -129,7 +128,7 @@ class IDBHelper {
   }
 
   /**
-   * add new review in idb restaurant review
+   * Add new review in idb restaurant review
    */
   static idbPostReview(id, body) {
     let key = parseInt(id);

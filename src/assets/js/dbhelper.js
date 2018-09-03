@@ -10,6 +10,7 @@ class DBHelper {
     const port = 1337; // Change this to your server port
     return `http://localhost:${port}`;
   }
+
   /**
    * Fetch all restaurants.
    */
@@ -18,6 +19,7 @@ class DBHelper {
       return callback(null, restaurants);
     });
   }
+
   /**
    * Fetch a restaurant by its ID.
    */
@@ -171,13 +173,16 @@ class DBHelper {
    * Add or Remove is_favorite on the server
    */
   static toggleFavorite(id, condition) {
-    fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}/?is_favorite=${condition}`, { method: 'POST' })
+    fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}/?is_favorite=${condition}`, {
+      method: 'POST'
+    })
       .then(res => console.log('restaurant favorite has been updated'))
       .then(IDBHelper.idbToggleFavorite(id, condition))
       .then(location.reload());
   }
+
   /**
-   * Add or Remove is_favorite on the server
+   * Save offline review
    */
   static saveOfflineReview(event, form) {
     event.preventDefault();
